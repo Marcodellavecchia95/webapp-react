@@ -20,6 +20,7 @@ export default function HomePage() {
           {movies.map((movie) => {
             return (
               <MovieCard
+                key={movie.id}
                 id={movie.id}
                 title={movie.title}
                 abstract={movie.abstract}

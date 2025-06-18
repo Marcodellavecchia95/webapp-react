@@ -25,29 +25,27 @@ export default function MovieDetailsPage() {
   useEffect(fetchMovieDetails, [id]);
   useEffect(fetchMovieReviews, [id]);
 
-  if (!movieDetails) {
-    return <div className="container">Caricamento dettagli film...</div>;
-  }
-
   return (
     <div className="container">
       <div className="row ">
         <div className="col-6 d-flex justify-content-center">
-          <MovieCardDetails
-            id={movieDetails.id}
-            title={movieDetails.title}
-            director={movieDetails.director}
-            genre={movieDetails.genre}
-            release_year={movieDetails.release_year}
-            abstract={movieDetails.abstract}
-          />
+          {movieDetails && (
+            <MovieCardDetails
+              id={movieDetails.id}
+              title={movieDetails.title}
+              director={movieDetails.director}
+              genre={movieDetails.genre}
+              release_year={movieDetails.release_year}
+              abstract={movieDetails.abstract}
+            />
+          )}
         </div>
         <div className="col-6 ">
           <h2>Reviews</h2>
           {movieReviews &&
             movieReviews.map((review) => {
               return (
-                <>
+                <section key={review.id}>
                   <div>
                     <strong>Name: </strong>
                     {review.name}
@@ -61,7 +59,7 @@ export default function MovieDetailsPage() {
                     {review.vote}
                   </div>
                   <hr />
-                </>
+                </section>
               );
             })}
         </div>
