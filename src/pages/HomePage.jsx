@@ -8,7 +8,6 @@ export default function HomePage() {
   const fetchMovies = () => {
     axios.get(ApiBackend).then((res) => {
       setMovies(res.data);
-      console.log(movies);
     });
   };
 
