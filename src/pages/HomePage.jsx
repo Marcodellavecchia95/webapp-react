@@ -19,7 +19,13 @@ export default function HomePage() {
       <div className="container">
         <div className="row">
           {movies.map((movie) => {
-            return <MovieCard />;
+            return (
+              <MovieCard
+                id={movie.id}
+                title={movie.title}
+                abstract={movie.abstract}
+              />
+            );
           })}
         </div>
       </div>
