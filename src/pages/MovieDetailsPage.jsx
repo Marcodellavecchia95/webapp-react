@@ -2,6 +2,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import MovieCardDetails from "../components/MovieCardDetails";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 
 export default function MovieDetailsPage() {
   const { id } = useParams();
@@ -9,6 +12,19 @@ export default function MovieDetailsPage() {
   const [movieDetails, setMovieDetails] = useState(null);
   const ApiBackend = import.meta.env.VITE_BACKEND_URL;
   const [movieReviews, setMovieRevews] = useState(null);
+
+  const fetchStars = (vote) => {
+    const stars = [];
+    for (let i = 0; i < 5; i++) {
+      if (i < vote) {
+        stars.push(<FontAwesomeIcon icon={solidStar} className="solid-star" />);
+      } else {
+        stars.push(<FontAwesomeIcon icon={regularStar} />);
+      }
+    }
+    return stars;
+    console.log(stars);
+  };
 
   const fetchMovieDetails = () => {
     axios.get(`${ApiBackend}/${id}`).then((res) => {
@@ -56,7 +72,7 @@ export default function MovieDetailsPage() {
                   </div>
                   <div>
                     <strong>Vote: </strong>
-                    {review.vote}
+                    {fetchStars(review.vote)}
                   </div>
                   <hr />
                 </section>

@@ -5,3 +5,7 @@ header {
 header img {
   max-width: 20%;
 }
+
+.solid-star {
+  color: gold;
+}
