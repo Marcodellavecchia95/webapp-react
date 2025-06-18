@@ -25,7 +25,6 @@ export default function HomePage() {
                 id={movie.id}
                 image={`${ApiBackend}/movies_cover/${movie.image}`}
                 title={movie.title}
-                abstract={movie.abstract}
               />
             );
           })}

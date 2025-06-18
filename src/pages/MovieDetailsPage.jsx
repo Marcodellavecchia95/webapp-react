@@ -23,7 +23,6 @@ export default function MovieDetailsPage() {
       }
     }
     return stars;
-    console.log(stars);
   };
 
   const fetchMovieDetails = () => {
