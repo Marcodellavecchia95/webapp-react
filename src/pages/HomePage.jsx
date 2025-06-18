@@ -12,6 +12,7 @@ export default function HomePage() {
   };
 
   useEffect(fetchMovies, []);
+  console.log(movies);
 
   return (
     <main>
@@ -22,6 +23,7 @@ export default function HomePage() {
               <MovieCard
                 key={movie.id}
                 id={movie.id}
+                image={`${ApiBackend}/movies_cover/${movie.image}`}
                 title={movie.title}
                 abstract={movie.abstract}
               />

@@ -9,3 +9,11 @@ header img {
 .solid-star {
   color: gold;
 }
+
+.card-img-top {
+  width: auto;
+}
+
+.card {
+  width: 18rem;
+}
