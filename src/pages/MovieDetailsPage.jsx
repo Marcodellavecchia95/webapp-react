@@ -5,6 +5,7 @@ import MovieCardDetails from "../components/MovieCardDetails";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
+import FormReview from "../components/FormReview";
 
 export default function MovieDetailsPage() {
   const { id } = useParams();
@@ -77,6 +78,11 @@ export default function MovieDetailsPage() {
                 </section>
               );
             })}
+        </div>
+      </div>
+      <div className="row ">
+        <div className="col-4">
+          <FormReview movie_id={id} />
         </div>
       </div>
     </div>
