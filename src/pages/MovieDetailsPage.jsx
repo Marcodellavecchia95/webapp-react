@@ -18,9 +18,11 @@ export default function MovieDetailsPage() {
     const stars = [];
     for (let i = 0; i < 5; i++) {
       if (i < vote) {
-        stars.push(<FontAwesomeIcon icon={solidStar} className="solid-star" />);
+        stars.push(
+          <FontAwesomeIcon key={i} icon={solidStar} className="solid-star" />
+        );
       } else {
-        stars.push(<FontAwesomeIcon icon={regularStar} />);
+        stars.push(<FontAwesomeIcon icon={regularStar} key={i} />);
       }
     }
     return stars;
