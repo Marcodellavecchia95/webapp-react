@@ -3,14 +3,13 @@ import { useState } from "react";
 
 const ApiBackend = import.meta.env.VITE_BACKEND_URL;
 
-const formDataDefault = {
-  name: "name",
-  vote: 1,
-  text: "",
-  movie_id,
-};
-
 export default function FormReview({ movie_id }) {
+  const formDataDefault = {
+    name: "name",
+    vote: 1,
+    text: "",
+    movie_id,
+  };
   const [formDataReview, setFormDataReview] = useState(formDataDefault);
   const formSubmit = (e) => {
     e.preventDefault();
@@ -25,7 +24,7 @@ export default function FormReview({ movie_id }) {
   return (
     <>
       <h2>Your Review</h2>
-      <form onSubmit={formSubmit}>
+      <form className="d-flex flex-column  " onSubmit={formSubmit}>
         <input
           onChange={inputHandler}
           value={formDataReview.name}
@@ -53,7 +52,7 @@ export default function FormReview({ movie_id }) {
           onChange={inputHandler}
           rows={5}
         ></textarea>
-        <button className="btn btn-success ml-2">Send Review</button>
+        <button className="btn btn-success mt-3 ">Send Review</button>
       </form>
     </>
   );
