@@ -1,11 +1,11 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ApiBackend = import.meta.env.VITE_BACKEND_URL;
 
 export default function FormReview({ movie_id }) {
   const formDataDefault = {
-    name: "name",
+    name: "",
     vote: 1,
     text: "",
     movie_id,
@@ -15,29 +15,36 @@ export default function FormReview({ movie_id }) {
     e.preventDefault();
     axios.post(ApiBackend + "/" + movie_id, formDataReview).then((res) => {
       setFormDataReview(formDataDefault);
+      location.reload();
     });
   };
 
   const inputHandler = (e) => {
     setFormDataReview({ ...formDataReview, [e.target.name]: e.target.value });
   };
+
   return (
     <>
       <h2>Your Review</h2>
       <form className="d-flex flex-column  " onSubmit={formSubmit}>
+        <label className="my-1" htmlFor="name">
+          <strong>Name</strong>
+        </label>
         <input
           onChange={inputHandler}
           value={formDataReview.name}
           name="name"
           id="name"
-          className="form-control my-3"
+          className="form-control mb-3"
           type="text"
-          placeholder="Name"
         />
+        <label className="my-1" htmlFor="vote">
+          <strong>Vote</strong>
+        </label>
         <input
           onChange={inputHandler}
           value={formDataReview.vote}
-          className="form-control my-3"
+          className="form-control"
           id="vote"
           name="vote"
           type="number"
@@ -45,6 +52,9 @@ export default function FormReview({ movie_id }) {
           min={1}
           max={5}
         />
+        <label className="my-1" htmlFor="text">
+          <strong>Text</strong>
+        </label>
         <textarea
           name="text"
           value={formDataReview.text}
@@ -52,7 +62,7 @@ export default function FormReview({ movie_id }) {
           onChange={inputHandler}
           rows={5}
         ></textarea>
-        <button className="btn btn-success mt-3 ">Send Review</button>
+        <button className="btn btn-success mt-3">Send Review</button>
       </form>
     </>
   );
