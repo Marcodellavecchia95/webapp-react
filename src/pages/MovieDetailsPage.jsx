@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import FormReview from "../components/FormReview";
+import Loader from "../components/Loader";
 
 export default function MovieDetailsPage() {
   const { id } = useParams();
@@ -13,6 +14,7 @@ export default function MovieDetailsPage() {
   const [movieDetails, setMovieDetails] = useState(null);
   const ApiBackend = import.meta.env.VITE_BACKEND_URL;
   const [movieReviews, setMovieRevews] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchStars = (vote) => {
     const stars = [];
@@ -29,21 +31,35 @@ export default function MovieDetailsPage() {
   };
 
   const fetchMovieDetails = () => {
+    setIsLoading(true);
     axios.get(`${ApiBackend}/${id}`).then((res) => {
       setMovieDetails(res.data.movie);
+      setIsLoading(false);
     });
   };
 
   const fetchMovieReviews = () => {
+    setIsLoading(true);
     axios.get(`${ApiBackend}/${id}`).then((res) => {
       setMovieRevews(res.data.reviews);
+      setIsLoading(false);
     });
   };
 
-  useEffect(fetchMovieDetails, [id]);
-  useEffect(fetchMovieReviews, [id]);
+  // useEffect(fetchMovieDetails, [id]);
+  // useEffect(fetchMovieReviews, [id]);
+  useEffect(() => {
+    setIsLoading(true);
+    axios.get(`${ApiBackend}/${id}`).then((res) => {
+      setMovieDetails(res.data.movie);
+      setMovieRevews(res.data.reviews);
+      setIsLoading(false);
+    });
+  }, [id]);
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <div className="container">
       <div className="row ">
         <div className="col-6 d-flex justify-content-center">
